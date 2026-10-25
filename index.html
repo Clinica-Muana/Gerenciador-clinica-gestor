@@ -1,35 +1,235 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clínica de Medicina Natural Muana Milunga</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel do Gestor | Clínica Muana Milunga</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#f8f8f8;color:#333}
-header{background:#1a7a3a;color:white;text-align:center;padding:30px 15px}
-header h1{font-size:26px;margin-bottom:5px}
-.hero{background:white;padding:25px;text-align:center}
-.hero h2{color:#1a7a3a;margin-bottom:10px}
-.btn{display:inline-block;background:#25D366;color:white;padding:14px 28px;border-radius:30px;text-decoration:none;font-weight:bold;font-size:17px;margin:10px}
-.btn2{background:#1a7a3a}
-.services{padding:20px}
-.card{background:white;padding:18px;margin:12px 0;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
-.card h3{color:#1a7a3a;margin-bottom:5px}
-.price{color:#e67e22;font-weight:bold;font-size:18px}
-footer{background:#111;color:white;text-align:center;padding:20px;font-size:14px}
+:root{--green:#0d493b;--green2:#176c55;--pale:#eef6f1;--ink:#172b36;--muted:#687b83;--line:#e1e9e5;--bg:#f5f8f6;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}
+.login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#092f28,#17664e)}
+.login{background:#fff;border-radius:22px;padding:30px;width:min(420px,100%);box-shadow:0 24px 70px #001b1740}.logo{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:#e1f0e6;color:var(--green);font-size:30px;margin-bottom:18px}.login h1{font-size:23px;margin:0 0 7px}.sub{color:var(--muted);line-height:1.5;margin:0 0 24px;font-size:14px}.field{display:block;margin:15px 0}.field span{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input{width:100%;padding:12px 13px;border:1px solid #d7e2dc;border-radius:10px;background:#fff;outline-color:#4a9a7c}.primary{border:0;background:var(--green2);color:#fff;padding:12px 16px;border-radius:10px;font-weight:700;cursor:pointer}.primary:disabled{opacity:.65;cursor:wait}.login .primary{width:100%;margin-top:8px}.hint{font-size:12px;color:#7a898d;margin-top:18px;line-height:1.5}.error{color:var(--red);font-size:13px;white-space:pre-wrap;min-height:18px;margin-top:8px}
+.app{display:none;min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:235px;background:linear-gradient(180deg,#0b332c,#082b25);color:white;padding:25px 15px;display:flex;flex-direction:column}.brand{display:flex;gap:12px;align-items:center;padding:5px 5px 30px}.brand-mark{font-size:27px;color:#b4d99c}.brand strong{display:block;font-family:Georgia,serif;font-size:18px}.brand small{color:#d0e0d8}.nav button{width:100%;border:0;background:transparent;color:#e7f1ec;text-align:left;padding:13px 14px;border-radius:9px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:#ffffff1c}.sidebar-foot{margin-top:auto;color:#b7c9c0;font-size:12px;line-height:1.5;padding:12px}
+.main{margin-left:235px;padding:24px 28px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}.top h1{font-size:25px;margin:0 0 5px}.top p{margin:0;color:var(--muted);font-size:14px}.pill{display:inline-block;background:#e2f3e8;color:#176b43;border-radius:20px;padding:8px 12px;font-size:12px;font-weight:700;margin-right:6px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.stat,.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px}.stat .label{font-size:13px;color:var(--muted)}.stat .num{font-size:29px;font-weight:750;margin:10px 0 4px}.stat .desc{font-size:12px;color:var(--muted)}.content{display:grid;grid-template-columns:minmax(0,1fr) 265px;gap:16px}.panel h2{font-size:17px;margin:0 0 16px}.tools{display:flex;gap:9px;margin-bottom:15px;flex-wrap:wrap}.tools input{flex:1;min-width:180px;padding:11px;border:1px solid var(--line);border-radius:9px}.tools select{padding:10px;border:1px solid var(--line);border-radius:9px;background:#fff}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}th{text-align:left;background:#f4f7f5;color:#344c53;padding:12px 10px}td{padding:13px 10px;border-bottom:1px solid #edf1ee}.status{display:inline-block;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:700}.s-pendente{background:#fff1c2;color:#8b5b00}.s-confirmado{background:#ddf5e4;color:#187144}.s-cancelado{background:#fee4e2;color:#b42318}.action{border:1px solid var(--line);background:#fff;border-radius:7px;padding:7px 9px;cursor:pointer;margin-right:4px}.side-panel{display:flex;flex-direction:column;gap:14px}.status-line{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #edf1ee;font-size:13px}.note{font-size:12px;color:var(--muted);line-height:1.55}.footer{border-top:1px solid var(--line);padding:17px 0;margin-top:18px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:10px}.modal{display:none;position:fixed;inset:0;background:#102a2480;place-items:center;padding:18px;z-index:5}.modal-box{background:white;border-radius:16px;padding:22px;width:min(500px,100%);max-height:90vh;overflow:auto}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal-head h2{font-size:19px}.close{border:0;background:#eef3ef;border-radius:8px;padding:7px 10px;cursor:pointer}.modal-box p{white-space:pre-wrap}.hidden{display:none!important}
+@media(max-width:1100px){.content{grid-template-columns:1fr}.side-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.sidebar{position:static;width:auto;padding:12px}.brand{padding-bottom:12px}.brand strong{font-size:16px}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap;width:auto;padding:10px}.sidebar-foot{display:none}.main{margin:0;padding:16px}.top h1{font-size:21px}.top{align-items:flex-start;flex-direction:column}.stats{gap:9px}.stat{padding:13px}.stat .num{font-size:24px}.side-panel{grid-template-columns:1fr}.footer{flex-direction:column}}
 </style>
 </head>
 <body>
-<header><h1>🌿 CLÍNICA MUANA MILUNGA</h1><p>Medicina Natural - Cuidamos da sua saúde</p></header>
-<div class="hero"><h2>Consultas a partir de 4.000 Kz</h2><p>Tratamento natural para vários problemas de saúde</p><a class="btn" href="https://wa.me/244974940967?text=Ol%C3%A1%2C%20quero%20marcar%20uma%20consulta">📱 Marcar no WhatsApp</a><br><a class="btn btn2" href="tel:+244974940967">📞 Ligar Agora</a></div>
-<div class="services">
-<div class="card"><h3>🩺 Urologia Natural</h3><p>Prostatite, Infecção Urinária, Ejaculação Precoce</p><div class="price">4.000 Kz - Consulta</div></div>
-<div class="card"><h3>🌱 Impotência Sexual</h3><p>Tratamento 100% natural</p><div class="price">15.000 Kz</div></div>
-<div class="card"><h3>💪 Hérnia</h3><p>Tratamento natural para Hérnia</p><div class="price">Consulte-nos</div></div>
+<section id="loginView" class="login-wrap">
+  <form class="login" id="loginForm">
+    <div class="logo">✿</div><h1>Clínica Muana Milunga</h1>
+    <p class="sub">Medicina Natural · Área privada do gestor</p>
+    <label class="field"><span>Email do gestor</span><input id="email" type="email" autocomplete="username" required placeholder="Email autorizado no Supabase"></label>
+    <label class="field"><span>Palavra-passe</span><input id="password" type="password" autocomplete="current-password" required placeholder="Palavra-passe da conta"></label>
+    <div class="error" id="loginError" role="alert"></div>
+    <button class="primary" id="loginButton" type="submit">Entrar no painel</button>
+    <p class="hint">Acesso protegido pelo Supabase Auth. Não uses aqui a chave secreta (service_role). Só contas autorizadas e políticas RLS corretas podem consultar os pedidos.</p>
+  </form>
+</section>
+<div id="app" class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">❧</div><div><strong>Clínica Muana Milunga</strong><small>Medicina Natural</small></div></div>
+    <nav class="nav">
+      <button class="active" id="navHome">⌂ &nbsp; Painel principal</button>
+      <button id="navRequests">☷ &nbsp; Pedidos</button>
+      <button id="navRefresh">↻ &nbsp; Atualizar pedidos</button>
+    </nav>
+    <div class="sidebar-foot">“Saúde natural, para uma vida melhor.”<br><br>Área privada — acesso autorizado</div>
+  </aside>
+  <main class="main">
+    <header class="top"><div><h1>Painel de Gestão</h1><p>Pedidos dos clientes · Clínica Muana Milunga</p></div><div><span class="pill" id="sessionStatus">● Sessão autenticada</span><button class="action" id="logoutButton">Sair ↗</button></div></header>
+    <section class="stats">
+      <div class="stat"><div class="label">Total de pedidos</div><div class="num" id="totalCount">0</div><div class="desc">Registos encontrados</div></div>
+      <div class="stat"><div class="label">Pendentes</div><div class="num" id="newCount">0</div><div class="desc">Requerem atenção</div></div>
+      <div class="stat"><div class="label">Confirmados</div><div class="num" id="progressCount">0</div><div class="desc">Confirmados</div></div>
+      <div class="stat"><div class="label">Cancelados</div><div class="num" id="doneCount">0</div><div class="desc">Cancelados</div></div>
+    </section>
+    <section class="content">
+      <div class="panel" id="requestsPanel"><h2>Pedidos dos clientes</h2>
+        <div class="tools"><input id="search" placeholder="Pesquisar nome, telefone ou serviço…"><select id="filter"><option value="">Todos os estados</option><option value="pendente">Pendente</option><option value="confirmado">Confirmado</option><option value="cancelado">Cancelado</option></select></div>
+        <div class="table-wrap"><table><thead><tr><th>Nome</th><th>Telefone</th><th>Serviço</th><th>Data</th><th>Hora</th><th>Estado</th><th>Ações</th></tr></thead><tbody id="rows"><tr><td colspan="7">A carregar…</td></tr></tbody></table></div>
+        <p class="note" id="rowCount" role="status">A preparar ligação…</p>
+      </div>
+      <div class="side-panel">
+        <div class="panel"><h2>Resumo dos pedidos</h2><div class="status-line"><span>🟡 Pendentes</span><strong id="sideNew">0</strong></div><div class="status-line"><span>🟢 Confirmados</span><strong id="sideProgress">0</strong></div><div class="status-line"><span>🔴 Cancelados</span><strong id="sideDone">0</strong></div><div class="status-line"><span>Total</span><strong id="sideTotal">0</strong></div></div>
+        <div class="panel"><h2>Estado da ligação</h2><p class="note" id="connectionNote">A verificar ligação ao Supabase…</p><button class="primary" id="refreshButton" style="width:100%">Atualizar pedidos</button></div>
+        <div class="panel"><h2>Segurança</h2><p class="note">Este painel não guarda a palavra-passe no ficheiro. Acesso e alterações dependem do Supabase Auth e das políticas RLS da tabela pedidos.</p></div>
+      </div>
+    </section>
+    <footer class="footer"><span>Clínica Muana Milunga · Sistema de Gestão</span><span>Área privada · Acesso autorizado</span></footer>
+  </main>
 </div>
-<footer><p><b>Muana Milunga</b> - Medicina Natural</p><p>📍 Luanda, Angola | 📞 974 94 09 67 | 951 85 70 06</p><p style="margin-top:10px;font-size:12px;opacity:0.7">© 2026 Todos os direitos reservados</p></footer>
-<!-- BOTÃO INVISÍVEL DO GESTOR -->
-<a href="admin.html" style="display:block;width:100%;height:1px;color:transparent;font-size:1px;opacity:0;">.</a>
+<div class="modal" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoTitle"><div class="modal-box"><div class="modal-head"><h2 id="infoTitle">Informação</h2><button class="close" id="closeModal">Fechar ✕</button></div><p id="infoText" class="note"></p></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+'use strict';
+const SUPABASE_URL = 'https://dvpufngcvnydkxdelzyb.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_u_07qEhNMRpdfAiQ8fxRaQ__e_x1YgD';
+const $ = id => document.getElementById(id);
+let supabaseClient = null;
+let requests = [];
+
+function showInfo(title, message) {
+  $('infoTitle').textContent = title;
+  $('infoText').textContent = message;
+  $('infoModal').style.display = 'grid';
+}
+function showLoginError(message) { $('loginError').textContent = message; }
+function statusLabel(status) {
+  return ({pendente:'Pendente', confirmado:'Confirmado', cancelado:'Cancelado'})[status] || status || 'Sem estado';
+}
+function setStats() {
+  const pending = requests.filter(r => (r.estado || 'pendente') === 'pendente').length;
+  const confirmed = requests.filter(r => r.estado === 'confirmado').length;
+  const cancelled = requests.filter(r => r.estado === 'cancelado').length;
+  [['totalCount',requests.length],['newCount',pending],['progressCount',confirmed],['doneCount',cancelled],
+   ['sideNew',pending],['sideProgress',confirmed],['sideDone',cancelled],['sideTotal',requests.length]]
+   .forEach(([id,value]) => $(id).textContent = String(value));
+}
+function renderRequests() {
+  const query = $('search').value.trim().toLowerCase();
+  const filter = $('filter').value;
+  const list = requests.filter(r => {
+    const status = r.estado || 'pendente';
+    const matchesStatus = !filter || status === filter;
+    const text = [r.nome,r.telefone,r.servico,r.data,r.hora,status].join(' ').toLowerCase();
+    return matchesStatus && text.includes(query);
+  });
+  const tbody = $('rows');
+  tbody.replaceChildren();
+  if (!list.length) {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 7; td.textContent = requests.length ? 'Nenhum pedido corresponde à pesquisa.' : 'Ainda não foram encontrados pedidos.';
+    tr.appendChild(td); tbody.appendChild(tr);
+  }
+  list.forEach(r => {
+    const tr = document.createElement('tr');
+    [r.nome,r.telefone,r.servico,r.data,r.hora].forEach(value => {
+      const td = document.createElement('td'); td.textContent = value == null ? '' : String(value); tr.appendChild(td);
+    });
+    const statusCell = document.createElement('td');
+    const badge = document.createElement('span');
+    const status = r.estado || 'pendente';
+    badge.className = 'status ' + (status === 'confirmado' ? 's-confirmado' : status === 'cancelado' ? 's-cancelado' : 's-pendente');
+    badge.textContent = statusLabel(status); statusCell.appendChild(badge); tr.appendChild(statusCell);
+    const actions = document.createElement('td');
+    const select = document.createElement('select'); select.className = 'action'; select.setAttribute('aria-label','Alterar estado do pedido');
+    [['pendente','Pendente'],['confirmado','Confirmado'],['cancelado','Cancelado']].forEach(([value,label]) => {
+      const option = document.createElement('option'); option.value = value; option.textContent = label; option.selected = status === value; select.appendChild(option);
+    });
+    select.addEventListener('change', () => updateStatus(r, select));
+    actions.appendChild(select);
+    const view = document.createElement('button'); view.className = 'action'; view.textContent = 'Ver';
+    view.addEventListener('click', () => showInfo('Pedido de ' + (r.nome || 'cliente'),
+      'Telefone: ' + (r.telefone || '—') + '\nServiço: ' + (r.servico || '—') + '\nData: ' + (r.data || '—') +
+      '\nHora: ' + (r.hora || '—') + '\nEstado: ' + statusLabel(r.estado)));
+    actions.appendChild(view); tr.appendChild(actions); tbody.appendChild(tr);
+  });
+  $('rowCount').textContent = 'A mostrar ' + list.length + ' de ' + requests.length + ' pedido(s).';
+  setStats();
+}
+async function loadRequests() {
+  if (!supabaseClient) return;
+  $('rowCount').textContent = 'A carregar pedidos…';
+  $('connectionNote').textContent = 'A consultar a tabela pedidos…';
+  try {
+    const {data,error} = await supabaseClient.from('pedidos')
+      .select('id,nome,telefone,servico,data,hora,estado,created_at')
+      .order('created_at',{ascending:false}).limit(300);
+    if (error) throw error;
+    requests = data || [];
+    renderRequests();
+    $('sessionStatus').textContent = '● Ligado ao Supabase';
+    $('connectionNote').textContent = 'Ligação autenticada. Foram carregados ' + requests.length + ' pedido(s).';
+  } catch (error) {
+    console.error('Erro ao carregar pedidos:', error);
+    $('rowCount').textContent = 'Não foi possível ler os pedidos. Confirma os nomes das colunas e as políticas RLS.';
+    $('connectionNote').textContent = 'Erro na consulta: ' + (error.message || 'erro desconhecido') + '.';
+    showInfo('Erro ao carregar pedidos', (error.message || 'Erro desconhecido') +
+      '\n\nConfirma se a tabela se chama pedidos e se contém as colunas nome, telefone, servico, data, hora, estado e created_at. Confirma também as políticas RLS.');
+  }
+}
+async function updateStatus(request, select) {
+  const previous = request.estado || 'pendente';
+  select.disabled = true;
+  try {
+    const {error} = await supabaseClient.from('pedidos').update({estado:select.value}).eq('id',request.id);
+    if (error) throw error;
+    request.estado = select.value;
+    renderRequests();
+  } catch (error) {
+    select.value = previous;
+    showInfo('Não foi possível atualizar', (error.message || 'Erro desconhecido') +
+      '\nConfirma se a coluna estado existe e se a política RLS permite ao gestor atualizar pedidos.');
+  } finally { select.disabled = false; }
+}
+async function login(event) {
+  event.preventDefault();
+  showLoginError('');
+  if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+    showLoginError('A biblioteca Supabase não carregou. Verifica a internet e tenta novamente.');
+    return;
+  }
+  const button = $('loginButton');
+  button.disabled = true; button.textContent = 'A verificar…';
+  try {
+    if (!supabaseClient) supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+    const {error} = await supabaseClient.auth.signInWithPassword({
+      email: $('email').value.trim(), password: $('password').value
+    });
+    if (error) throw error;
+    $('loginView').style.display = 'none';
+    $('app').style.display = 'block';
+    $('sessionStatus').textContent = '● Sessão autenticada';
+    await loadRequests();
+  } catch (error) {
+    console.error('Erro de autenticação:', error);
+    showLoginError('Não foi possível entrar: ' + (error.message || 'confirma o email e a palavra-passe da conta autorizada no Supabase.'));
+  } finally {
+    button.disabled = false; button.textContent = 'Entrar no painel';
+  }
+}
+async function logout() {
+  if (supabaseClient) await supabaseClient.auth.signOut();
+  $('app').style.display = 'none'; $('loginView').style.display = 'grid';
+  $('password').value = ''; showLoginError(''); $('sessionStatus').textContent = '● Sessão terminada';
+}
+$('loginForm').addEventListener('submit', login);
+$('logoutButton').addEventListener('click', logout);
+$('refreshButton').addEventListener('click', loadRequests);
+$('navRefresh').addEventListener('click', loadRequests);
+$('navRequests').addEventListener('click', () => $('requestsPanel').scrollIntoView({behavior:'smooth'}));
+$('navHome').addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+$('search').addEventListener('input', renderRequests);
+$('filter').addEventListener('change', renderRequests);
+$('closeModal').addEventListener('click', () => $('infoModal').style.display = 'none');
+$('infoModal').addEventListener('click', event => { if (event.target === $('infoModal')) $('infoModal').style.display = 'none'; });
+(async function init() {
+  if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+    showLoginError('A biblioteca Supabase não carregou. Verifica a ligação à internet.');
+    $('connectionNote').textContent = 'Biblioteca Supabase indisponível.';
+    return;
+  }
+  supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+  try {
+    const {data,error} = await supabaseClient.auth.getSession();
+    if (error) throw error;
+    if (data.session) {
+      $('loginView').style.display = 'none'; $('app').style.display = 'block';
+      $('sessionStatus').textContent = '● Sessão autenticada';
+      await loadRequests();
+    } else {
+      $('sessionStatus').textContent = '● Sessão não iniciada';
+      $('connectionNote').textContent = 'Entra com o email e a palavra-passe autorizados no Supabase.';
+    }
+  } catch (error) {
+    console.error('Erro ao iniciar:', error);
+    showLoginError('Não foi possível iniciar a ligação ao Supabase: ' + (error.message || 'erro desconhecido'));
+  }
+})();
+</script>
 </body>
 </html>
